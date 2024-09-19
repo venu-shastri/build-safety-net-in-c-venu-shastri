@@ -1,4 +1,5 @@
 #include <gtest/gtest.h>
+#inculde "Soundex.h"
 
 TEST(SoundexAlgorithSuite, generate_soundex_GivenEmptyString_EmptyStringIsExpected){
 
