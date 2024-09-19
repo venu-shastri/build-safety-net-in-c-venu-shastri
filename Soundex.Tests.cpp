@@ -5,5 +5,5 @@ TEST(SoundexAlgorithSuite, generate_soundex_GivenEmptyString_EmptyStringIsExpect
 
       char soundexCode[5];
        generate_soundex("",soundexCode);
-    //  ASSERT_EQ(strcmp(soundexCode,""),"");
+      ASSERT_EQ(strcmp(soundexCode,""),0);
 }
