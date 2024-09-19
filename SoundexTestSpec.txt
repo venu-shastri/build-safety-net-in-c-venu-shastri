@@ -1,0 +1,68 @@
+Test Specification for Soundex Code Generation
+Overview
+This document outlines the test specifications for validating the functionality of the generate_soundex function. The Soundex algorithm converts words (particularly names) into a phonetic code to group similar-sounding words together. The tests described below aim to verify that the generate_soundex function adheres to the expected behavior of the Soundex algorithm.
+Test Cases
+1. Test Case: Empty String
+Test Description: Verifies that when an empty string is passed, the function returns an empty Soundex code.
+•	Input: "" (Empty string)
+•	Expected Output: "" (Empty Soundex code)
+________________________________________
+2. Test Case: Single Character
+Test Description: Checks that a single character returns the character followed by three zeros to form a valid Soundex code.
+•	Input: "A"
+•	Expected Output: "A000" (Character followed by three zeros)
+________________________________________
+3. Test Case: Similar Consonants
+Test Description: Ensures that similar consonants map to the same numeric Soundex code based on the Soundex rules.
+•	Input 1: "BFPV"
+o	Expected Output: "B100" (B -> B1, others are ignored)
+•	Input 2: "CGJKQSXZ"
+o	Expected Output: "C200" (C -> C2, others are ignored)
+•	Input 3: "DT"
+o	Expected Output: "D300" (D -> D3, T is ignored)
+•	Input 4: "L"
+o	Expected Output: "L400" (L -> L4)
+•	Input 5: "MN"
+o	Expected Output: "M500" (M -> M5, N is ignored)
+•	Input 6: "R"
+o	Expected Output: "R600" (R -> R6)
+________________________________________
+4. Test Case: Vowels and Ignored Characters
+Test Description: Verifies that vowels (A, E, I, O, U, Y) and specific ignored characters (H, W) are excluded from the Soundex code.
+•	Input 1: "AEIOUYHW"
+o	Expected Output: "A000" (All characters are ignored, except the first letter)
+•	Input 2: "BOAT"
+o	Expected Output: "B300" (O and A are ignored, B remains, T -> 3)
+________________________________________
+5. Test Case: Repeating Characters
+Test Description: Ensures that consecutive characters which would generate the same Soundex code are treated as a single character to avoid redundancy.
+•	Input 1: "BB"
+o	Expected Output: "B000" (Two B's treated as one)
+•	Input 2: "SS"
+o	Expected Output: "S000" (Two S's treated as one)
+•	Input 3: "FF"
+o	Expected Output: "F000" (Two F's treated as one)
+________________________________________
+6. Test Case: Name Padding
+Test Description: Checks that names with fewer than four characters are padded with zeros to form a valid 4-character Soundex code.
+•	Input 1: "Bo"
+o	Expected Output: "B000" (Padded with zeros to reach four characters)
+•	Input 2: "Ga"
+o	Expected Output: "G000" (Padded with zeros to reach four characters)
+•	Input 3: "Li"
+o	Expected Output: "L000" (Padded with zeros to reach four characters)
+________________________________________
+7. Test Case: Full Soundex Generation
+Test Description: Verifies the correct generation of Soundex codes for full names, ensuring compliance with the full set of Soundex rules (including handling of vowels, consonant groupings, and final padding/truncation).
+•	Input 1: "Robert"
+o	Expected Output: "R163" (Processed according to the rules of the algorithm)
+•	Input 2: "Rupert"
+o	Expected Output: "R163" (Same Soundex code as "Robert")
+•	Input 3: "Ashcraft"
+o	Expected Output: "A261" (Vowels and ignored characters handled correctly)
+•	Input 4: "Tymczak"
+o	Expected Output: "T522" (Consonants grouped correctly and processed)
+________________________________________
+Conclusion
+The above tests cover a wide range of possible inputs to the generate_soundex function, ensuring that it behaves according to the Soundex algorithm. The tests check for empty strings, single characters, similar consonants, exclusion of vowels and ignored characters, repeating characters, and proper name padding. Additionally, the tests ensure correct Soundex generation for full names.
+Each test case helps validate the robustness and correctness of the generate_soundex function across different scenarios.
